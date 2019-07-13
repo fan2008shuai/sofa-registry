@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Logback config -->
+
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{ISO8601}]%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+<!--
 <configuration scan="true" scanPeriod="30 seconds">
     <property scope="local" name="LOG_ENCODE" value="UTF-8"/>
     <springProperty scope="context" name="SESSION_LOG_HOME" source="session.server.logging.home"
                     defaultValue="${user.home}/logs/registry/session"/>
     <springProperty scope="context" name="LOG_LEVEL" source="session.server.logging.level" defaultValue="INFO"/>
 
-    <!-- common appenders -->
+    &lt;!&ndash; common appenders &ndash;&gt;
 
     <appender name="STDOUT-APPENDER" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -71,7 +84,7 @@
         </encoder>
     </appender>
 
-    <!-- session appenders -->
+    &lt;!&ndash; session appenders &ndash;&gt;
 
     <appender name="SESSION-DEFAULT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <append>true</append>
@@ -241,7 +254,7 @@
         <appender-ref ref="ERROR-PUSH-APPENDER"/>
     </appender>
 
-    <!-- common loggers -->
+    &lt;!&ndash; common loggers &ndash;&gt;
 
     <logger name="com.alipay.sofa.registry.jraft" level="${LOG_LEVEL}" additivity="false">
         <appender-ref ref="JRAFT-APPENDER"/>
@@ -253,7 +266,7 @@
         <appender-ref ref="COMMON-ERROR-APPENDER"/>
     </logger>
 
-    <!-- session loggers -->
+    &lt;!&ndash; session loggers &ndash;&gt;
 
     <logger name="com.alipay.sofa.registry.server.session" level="${LOG_LEVEL}" additivity="false">
         <appender-ref ref="SESSION-DEFAULT-APPENDER"/>
@@ -291,11 +304,11 @@
         <appender-ref ref="COMMON-ERROR-APPENDER"/>
     </logger>
 
-    <!-- root loggers -->
+    &lt;!&ndash; root loggers &ndash;&gt;
 
     <root level="${LOG_LEVEL}">
         <appender-ref ref="COMMON-DEFAULT-APPENDER"/>
         <appender-ref ref="COMMON-ERROR-APPENDER"/>
     </root>
 
-</configuration>
+</configuration>-->

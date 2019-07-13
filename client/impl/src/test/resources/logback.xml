@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Logback config -->
-
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -13,6 +12,7 @@
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
+
 <!--
 <configuration>
     <property scope="local" name="LOG_HOME" value="${logging.path}/registry"/>

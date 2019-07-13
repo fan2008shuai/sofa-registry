@@ -225,6 +225,7 @@ public class DefaultRegistryClient implements RegistryClient {
         client.init();
 
         // init registry check thread
+        // 周期性注册订阅任务
         new RegistryCheckThread().start();
 
         // init sync config thread

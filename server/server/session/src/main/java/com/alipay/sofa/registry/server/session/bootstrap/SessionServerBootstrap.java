@@ -247,6 +247,7 @@ public class SessionServerBootstrap {
     private void connectMetaServer() {
         try {
             if (metaStart.compareAndSet(false, true)) {
+                // 与meta server的leader建立连接
                 metaClient = metaNodeExchanger.connectServer();
 
                 int size = metaClient.getChannels().size();
@@ -254,6 +255,7 @@ public class SessionServerBootstrap {
                 URL leaderUrl = new URL(raftClientManager.getLeader().getIp(),
                     sessionServerConfig.getMetaServerPort());
 
+                // 将该session server注册至meta server
                 registerSessionNode(leaderUrl);
 
                 getAllDataCenter();
