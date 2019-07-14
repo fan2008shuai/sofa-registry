@@ -176,8 +176,7 @@ public class AcceptorExecutor<ID, T> {
                     // If all queues are empty, block for a while on the acceptor queue
                     if (reprocessQueue.isEmpty() && acceptorQueue.isEmpty()
                         && pendingTasks.isEmpty()) {
-                        TaskHolder<ID, T> taskHolder = acceptorQueue
-                            .poll(10, TimeUnit.MILLISECONDS);
+                        TaskHolder<ID, T> taskHolder = acceptorQueue.poll(10, TimeUnit.MILLISECONDS);
                         if (taskHolder != null) {
                             appendTaskHolder(taskHolder);
                         }

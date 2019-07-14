@@ -30,31 +30,31 @@ public class TaskEvent {
 
     public enum TaskType {
         //Session task
-        SUBSCRIBER_REGISTER_FETCH_TASK("SubscriberRegisterFetchTask"), SUBSCRIBER_PUSH_EMPTY_TASK(
-                                                                                                  "SubscriberPushEmptyTask"), WATCHER_REGISTER_FETCH_TASK(
-                                                                                                                                                          "WatcherRegisterFetchTask"), DATA_CHANGE_FETCH_TASK(
-                                                                                                                                                                                                              "DataChangeFetchTask"), DATA_PUSH_TASK(
-                                                                                                                                                                                                                                                     "DataPushTask"), DATA_CHANGE_FETCH_CLOUD_TASK(
-                                                                                                                                                                                                                                                                                                   "DataChangeFetchCloudTask"), RECEIVED_DATA_MULTI_PUSH_TASK(
-                                                                                                                                                                                                                                                                                                                                                              "ReceivedDataMultiPushTask"), RECEIVED_DATA_CONFIG_PUSH_TASK(
-                                                                                                                                                                                                                                                                                                                                                                                                                           "ReceivedDataConfigPushTask"), CANCEL_DATA_TASK(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                           "CancelDataTask"), SYNC_PUBLISHER_TASK(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  "SyncPublisherTask"), SYNC_SUBSCRIBER_TASK(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             "SyncSubscriberTask"), SESSION_REGISTER_DATA_TASK(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               "SessionRegisterDataTask"), PROVIDE_DATA_CHANGE_FETCH_TASK(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          "ProvideDataChangeFetchTask"),
+        SUBSCRIBER_REGISTER_FETCH_TASK("SubscriberRegisterFetchTask"),
+        SUBSCRIBER_PUSH_EMPTY_TASK("SubscriberPushEmptyTask"),
+        WATCHER_REGISTER_FETCH_TASK("WatcherRegisterFetchTask"),
+        DATA_CHANGE_FETCH_TASK("DataChangeFetchTask"),
+        DATA_PUSH_TASK("DataPushTask"),
+        DATA_CHANGE_FETCH_CLOUD_TASK("DataChangeFetchCloudTask"),
+        RECEIVED_DATA_MULTI_PUSH_TASK("ReceivedDataMultiPushTask"),
+        RECEIVED_DATA_CONFIG_PUSH_TASK("ReceivedDataConfigPushTask"),
+        CANCEL_DATA_TASK("CancelDataTask"),
+        SYNC_PUBLISHER_TASK("SyncPublisherTask"),
+        SYNC_SUBSCRIBER_TASK("SyncSubscriberTask"),
+        SESSION_REGISTER_DATA_TASK("SessionRegisterDataTask"),
+        PROVIDE_DATA_CHANGE_FETCH_TASK("ProvideDataChangeFetchTask"),
 
         SUBSCRIBER_MULTI_FETCH_TASK("SubscriberMultiFetchTask"),
 
         //Session Adapter task
-        USER_DATA_ELEMENT_PUSH_TASK("UserDataElementPushTask"), USER_DATA_ELEMENT_MULTI_PUSH_TASK(
-                                                                                                  "UserDataElementMultiPushTask"),
+        USER_DATA_ELEMENT_PUSH_TASK("UserDataElementPushTask"),
+        USER_DATA_ELEMENT_MULTI_PUSH_TASK("UserDataElementMultiPushTask"),
 
         //MetaServer task
-        SESSION_NODE_CHANGE_PUSH_TASK("SessionNodeChangePushTask"), DATA_NODE_CHANGE_PUSH_TASK(
-                                                                                               "DataNodeChangePushTask"), RECEIVE_STATUS_CONFIRM_NOTIFY_TASK(
-                                                                                                                                                             "ReceiveStatusConfirmNotifyTask"), PERSISTENCE_DATA_CHANGE_NOTIFY_TASK(
-                                                                                                                                                                                                                                    "PersistenceDataChangeNotifyTask");
+        SESSION_NODE_CHANGE_PUSH_TASK("SessionNodeChangePushTask"),
+        DATA_NODE_CHANGE_PUSH_TASK("DataNodeChangePushTask"),
+        RECEIVE_STATUS_CONFIRM_NOTIFY_TASK("ReceiveStatusConfirmNotifyTask"),
+        PERSISTENCE_DATA_CHANGE_NOTIFY_TASK("PersistenceDataChangeNotifyTask");
 
         private String name;
 

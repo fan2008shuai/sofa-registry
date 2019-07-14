@@ -143,6 +143,7 @@ public class MetaNodeExchanger implements NodeExchanger {
             } catch (Exception e) {
                 LOGGER.error("MetaNode Exchanger connect channel error!url:" + url, e);
             }
+            // fan: 此处看上去需要break，其实不需要，内部与各个meta nodes建立了连接，存放在了map中。
         }
         return sessionClient;
     }

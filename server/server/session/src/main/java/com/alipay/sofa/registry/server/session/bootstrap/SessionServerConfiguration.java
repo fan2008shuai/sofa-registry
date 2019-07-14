@@ -421,16 +421,14 @@ public class SessionServerConfiguration {
 
         @Bean
         public TaskListener subscriberRegisterFetchTaskListener(TaskListenerManager taskListenerManager) {
-            TaskListener taskListener = new SubscriberRegisterFetchTaskListener(
-                dataNodeSingleTaskProcessor());
+            TaskListener taskListener = new SubscriberRegisterFetchTaskListener(dataNodeSingleTaskProcessor());
             taskListenerManager.addTaskListener(taskListener);
             return taskListener;
         }
 
         @Bean
         public TaskListener subscriberMultiFetchTaskListener(TaskListenerManager taskListenerManager) {
-            TaskListener taskListener = new SubscriberMultiFetchTaskListener(
-                dataNodeSingleTaskProcessor());
+            TaskListener taskListener = new SubscriberMultiFetchTaskListener(dataNodeSingleTaskProcessor());
             taskListenerManager.addTaskListener(taskListener);
             return taskListener;
         }
@@ -453,8 +451,7 @@ public class SessionServerConfiguration {
 
         @Bean
         public TaskListener dataChangeFetchTaskListener(TaskListenerManager taskListenerManager) {
-            TaskListener taskListener = new DataChangeFetchTaskListener(
-                dataNodeSingleTaskProcessor());
+            TaskListener taskListener = new DataChangeFetchTaskListener(dataNodeSingleTaskProcessor());
             taskListenerManager.addTaskListener(taskListener);
             return taskListener;
         }
@@ -468,8 +465,7 @@ public class SessionServerConfiguration {
 
         @Bean
         public TaskListener dataChangeFetchCloudTaskListener(TaskListenerManager taskListenerManager) {
-            TaskListener taskListener = new DataChangeFetchCloudTaskListener(
-                dataNodeSingleTaskProcessor());
+            TaskListener taskListener = new DataChangeFetchCloudTaskListener(dataNodeSingleTaskProcessor());
             taskListenerManager.addTaskListener(taskListener);
             return taskListener;
         }

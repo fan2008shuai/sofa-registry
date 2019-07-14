@@ -32,7 +32,7 @@ import com.alipay.sofa.registry.task.listener.TaskListenerManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
+ * fan: session server周期拉取订阅的dataInfoId的数据(一般先比较data node中的version与session node中的版本，当有新的数据时，拉取)
  * @author shangyu.wh
  * @version $Id: DataChangeFetchCloudTaskListener.java, v 0.1 2018-03-16 15:26 shangyu.wh Exp $
  */

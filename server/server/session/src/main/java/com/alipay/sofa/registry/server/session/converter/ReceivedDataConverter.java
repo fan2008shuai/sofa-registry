@@ -217,9 +217,9 @@ public class ReceivedDataConverter {
      * @param datumMap the datum map 
      * @return the merge datum
      */
-    public static Datum getMergeDatum(Map<String, Datum> datumMap) {
+    public static Datum getMergeDatum(Map<String/*data center*/, Datum> datumMap) {
         Datum merge = null;
-        Map<String, Publisher> mergePublisherMap = new HashMap<>();
+        Map<String/*registerId*/, Publisher> mergePublisherMap = new HashMap<>();
         long version = 0;
         for (Datum datum : datumMap.values()) {
             if (datum.getDataId() == null) {

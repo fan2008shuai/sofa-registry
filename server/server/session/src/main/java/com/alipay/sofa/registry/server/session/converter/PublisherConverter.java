@@ -64,8 +64,7 @@ public class PublisherConverter {
 
             publisher.setClientVersion(ClientVersion.StoreData);
 
-            DataInfo dataInfo = new DataInfo(source.getInstanceId(), source.getDataId(),
-                    source.getGroup());
+            DataInfo dataInfo = new DataInfo(source.getInstanceId(), source.getDataId(), source.getGroup());
             publisher.setDataInfoId(dataInfo.getDataInfoId());
 
             publisher.setDataList(convert(source.getDataList()));

@@ -126,6 +126,7 @@ public class ExecutorManager {
                         new ArrayBlockingQueue<>(sessionServerConfig.getAccessDataExecutorQueueSize()),
                         new NamedThreadFactory("AccessData-executor", true)));
 
+        // fan: 为什么不直接用SessionThreadPoolExecutor?
         pushTaskExecutor = reportExecutors.computeIfAbsent(PUSH_TASK_EXECUTOR,
                 k -> new ThreadPoolExecutor(sessionServerConfig.getPushTaskExecutorMinPoolSize(),
                         sessionServerConfig.getPushTaskExecutorMaxPoolSize(),

@@ -62,6 +62,7 @@ public class DefaultPublisherHandlerStrategy implements PublisherHandlerStrategy
             }
 
             Publisher publisher = PublisherConverter.convert(publisherRegister);
+            // fan: processId与sourceAddress已经在convert过程中设置了。
             publisher.setProcessId(ip + ":" + port);
             publisher.setSourceAddress(new URL(channel.getRemoteAddress()));
             if (EventTypeConstants.REGISTER.equals(publisherRegister.getEventType())) {

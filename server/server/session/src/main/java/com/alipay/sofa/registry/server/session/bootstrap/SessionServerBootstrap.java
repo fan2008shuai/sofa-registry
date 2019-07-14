@@ -248,6 +248,7 @@ public class SessionServerBootstrap {
         try {
             if (metaStart.compareAndSet(false, true)) {
                 // 与meta server的leader建立连接
+                // fan: 此处并非与meta server的leader建立连接而是与meta server中的所有node都建立了连接
                 metaClient = metaNodeExchanger.connectServer();
 
                 int size = metaClient.getChannels().size();
@@ -258,6 +259,7 @@ public class SessionServerBootstrap {
                 // 将该session server注册至meta server
                 registerSessionNode(leaderUrl);
 
+                // fan: 又来一次获取所有的meta server nodes，其实在metaNodeExchanger.connectServer();中获取过一次
                 getAllDataCenter();
 
                 fetchStopPushSwitch(leaderUrl);
@@ -273,6 +275,7 @@ public class SessionServerBootstrap {
         }
     }
 
+    // fan: session node注册到meta nodes的leader节点，meta leader node给session node返回data nodes
     private void registerSessionNode(URL leaderUrl) {
         URL clientUrl = new URL(NetUtil.getLocalAddress().getHostAddress(), 0);
         SessionNode sessionNode = new SessionNode(clientUrl,
@@ -305,6 +308,7 @@ public class SessionServerBootstrap {
             if (data != null) {
                 if (!Boolean.valueOf(data)) {
                     //stop push init on,then begin fetch data schedule task
+                    // fan: 如果data server不主动推送数据，则session server主动拉取数据
                     sessionServerConfig.setBeginDataFetchTask(true);
                 }
             }

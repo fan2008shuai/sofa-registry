@@ -60,6 +60,8 @@ public class SessionInterests implements Interests, ReSubscribers {
 
     private Map<String/*connectId*/, Map<String/*registerId*/, Subscriber>>                               connectIndex      = new ConcurrentHashMap<>();
 
+    // fan: SubscriberResult(dataInfoId, scope), InetSocketAddress为该client的hostPort地址，String为registerId
+    // 此处逻辑：如果SubscriberResult相同，可能是不通的client进行的订阅，但是相同client，还会有不同的registerId的订阅？
     private Map<SubscriberResult, Map<InetSocketAddress, Map<String, Subscriber>>>                          resultIndex       = new ConcurrentHashMap<>();
 
     /**
@@ -201,8 +203,7 @@ public class SessionInterests implements Interests, ReSubscribers {
             return false;
         }
 
-        Map<String/*dataInfoId*/, Long/*version*/> dataInfoVersions = interestVersions
-            .get(dataCenter);
+        Map<String/*dataInfoId*/, Long/*version*/> dataInfoVersions = interestVersions.get(dataCenter);
         if (dataInfoVersions == null) {
             Map<String/*dataInfoId*/, Long/*version*/> newDataInfoVersions = new ConcurrentHashMap<>();
             dataInfoVersions = interestVersions.putIfAbsent(dataCenter, newDataInfoVersions);
@@ -284,8 +285,7 @@ public class SessionInterests implements Interests, ReSubscribers {
 
     private void addResultIndex(Subscriber subscriber) {
 
-        SubscriberResult subscriberResult = new SubscriberResult(subscriber.getDataInfoId(),
-            subscriber.getScope());
+        SubscriberResult subscriberResult = new SubscriberResult(subscriber.getDataInfoId(), subscriber.getScope());
         Map<InetSocketAddress, Map<String, Subscriber>> mapSub = resultIndex.get(subscriberResult);
         if (mapSub == null) {
             Map<InetSocketAddress, Map<String, Subscriber>> newMap = new ConcurrentHashMap<>();
@@ -379,6 +379,7 @@ public class SessionInterests implements Interests, ReSubscribers {
 
     @Override
     public void addReSubscriber(Subscriber subscriber) {
+        // fan: 如果停止了stopPush开关，维护stopPushInterests
         if (sessionServerConfig.isStopPushSwitch()) {
 
             String dataInfoId = subscriber.getDataInfoId();
@@ -398,7 +399,7 @@ public class SessionInterests implements Interests, ReSubscribers {
     @Override
     public boolean deleteReSubscriber(Subscriber subscriber) {
 
-        Map<String, Subscriber> subscribers = stopPushInterests.get(subscriber.getDataInfoId());
+        Map<String/*registerId*/, Subscriber> subscribers = stopPushInterests.get(subscriber.getDataInfoId());
 
         if (subscribers == null) {
             return false;

@@ -117,14 +117,12 @@ public class DataChangeFetchCloudTask extends AbstractSessionTask {
             PushTaskClosure pushTaskClosure = getTaskClosure(datumMap);
 
             for (ScopeEnum scopeEnum : ScopeEnum.values()) {
-                Map<InetSocketAddress, Map<String, Subscriber>> map = getCache(fetchDataInfoId,
-                    scopeEnum);
+                Map<InetSocketAddress, Map<String/*registerId*/, Subscriber>> map = getCache(fetchDataInfoId, scopeEnum);
                 if (map != null && !map.isEmpty()) {
                     for (Entry<InetSocketAddress, Map<String, Subscriber>> entry : map.entrySet()) {
-                        Map<String, Subscriber> subscriberMap = entry.getValue();
+                        Map<String/*registerId*/, Subscriber> subscriberMap = entry.getValue();
                         if (subscriberMap != null && !subscriberMap.isEmpty()) {
-                            List<String> subscriberRegisterIdList = new ArrayList<>(
-                                subscriberMap.keySet());
+                            List<String> subscriberRegisterIdList = new ArrayList<>(subscriberMap.keySet());
 
                             //select one row decide common info
                             Subscriber subscriber = subscriberMap.values().iterator().next();
@@ -147,6 +145,7 @@ public class DataChangeFetchCloudTask extends AbstractSessionTask {
 
     public PushTaskClosure getTaskClosure(Map<String/*dataCenter*/, Datum> datumMap) {
         PushTaskClosure pushTaskClosure = new PushTaskClosure(executorManager.getPushTaskClosureExecutor());
+        // 会回调此处的process方法
         pushTaskClosure.setTaskClosure((status, task) -> {
             if (status == ProcessingResult.Success) {
                 if (sessionServerConfig.isStopPushSwitch()) {
