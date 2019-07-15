@@ -143,7 +143,7 @@ public class MetaNodeExchanger implements NodeExchanger {
             } catch (Exception e) {
                 LOGGER.error("MetaNode Exchanger connect channel error!url:" + url, e);
             }
-            // fan: 此处看上去需要break，其实不需要，内部与各个meta nodes建立了连接，存放在了map中。
+            // fan: 在boltExchange clients map缓存中的是<serverType, boltClient>；一个boltClient维护了多个连接，存放在了channels map 缓存中
         }
         return sessionClient;
     }

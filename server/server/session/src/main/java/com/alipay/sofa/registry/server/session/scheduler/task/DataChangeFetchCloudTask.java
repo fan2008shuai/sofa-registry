@@ -232,7 +232,7 @@ public class DataChangeFetchCloudTask extends AbstractSessionTask {
         }
     }
 
-    private void fireReceiveDataPushTask(Map<String, Datum> datums,
+    private void fireReceiveDataPushTask(Map<String/*data center*/, Datum> datums,
                                          List<String> subscriberRegisterIdList,
                                          ScopeEnum scopeEnum, Subscriber subscriber,
                                          Map<String, Subscriber> subscriberMap,

@@ -70,6 +70,7 @@ public class DefaultSessionRegistryStrategy implements SessionRegistryStrategy {
     @Override
     public void doFetchChangDataProcess(Map<String/*datacenter*/, Map<String/*datainfoid*/, Long>> dataInfoIdVersions) {
         //diff dataCenter same dataInfoId sent once fetch on cloud mode
+        // fan: 只针对dataInfoId拉取数据，本次拉取会将dataInfoId在各个data center的地址数据都拉取回来
         Set<String> changeDataInfoIds = new HashSet<>();
         dataInfoIdVersions.forEach((dataCenter, dataInfoIdMap) -> {
             if (dataInfoIdMap != null) {

@@ -182,6 +182,7 @@ public class SessionRegistry implements Registry {
 
     @Override
     public void fetchChangData() {
+        // isBeginDataFetchTask在connectMetaServer时，从meta server拉取了
         if (!sessionServerConfig.isBeginDataFetchTask()) {
             try {
                 TimeUnit.MILLISECONDS.sleep(500);

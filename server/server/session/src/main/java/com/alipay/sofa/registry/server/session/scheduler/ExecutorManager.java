@@ -177,6 +177,7 @@ public class ExecutorManager {
                         () -> sessionRegistry.fetchChangData()),
                 sessionServerConfig.getSchedulerFetchDataFirstDelay(), TimeUnit.SECONDS);
 
+        // fan: 看上去没什么用
         scheduler.schedule(
                 new TimedSupervisorTask("ReNewData", scheduler, renNewDataExecutor,
                         sessionServerConfig.getSchedulerHeartbeatTimeout(), TimeUnit.SECONDS,
@@ -184,6 +185,7 @@ public class ExecutorManager {
                         () -> sessionNodeManager.reNewNode()),
                 sessionServerConfig.getSchedulerHeartbeatFirstDelay(), TimeUnit.SECONDS);
 
+        // fan: 更新session/data/meta server的地址列表（请求meta server的leader节点）此处为pull的方式，还有push的方式在NodeChangeResultHandler及DataChangeRequestHandler
         scheduler.schedule(
                 new TimedSupervisorTask("GetSessionNode", scheduler, getSessionNodeExecutor,
                         sessionServerConfig.getSchedulerGetSessionNodeTimeout(), TimeUnit.SECONDS,
@@ -195,6 +197,7 @@ public class ExecutorManager {
                         }),
                 sessionServerConfig.getSchedulerGetSessionNodeFirstDelay(), TimeUnit.SECONDS);
 
+        // fan: 维护与meta server的连接可用性（会剔除不可用的meta server，但是nodeExchanger里面的clients map缓存没有new新的）
         scheduler.schedule(
                 new TimedSupervisorTask("ConnectMetaServer", scheduler, connectMetaExecutor,
                         sessionServerConfig.getSchedulerConnectMetaTimeout(), TimeUnit.SECONDS,

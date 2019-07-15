@@ -256,7 +256,7 @@ public class SessionServerBootstrap {
                 URL leaderUrl = new URL(raftClientManager.getLeader().getIp(),
                     sessionServerConfig.getMetaServerPort());
 
-                // 将该session server注册至meta server
+                // fan: 将该session server注册至meta server
                 registerSessionNode(leaderUrl);
 
                 // fan: 又来一次获取所有的meta server nodes，其实在metaNodeExchanger.connectServer();中获取过一次
@@ -275,16 +275,15 @@ public class SessionServerBootstrap {
         }
     }
 
-    // fan: session node注册到meta nodes的leader节点，meta leader node给session node返回data nodes
+    // fan: session node注册到meta nodes的leader节点，meta leader node给session node返回data nodes? （返回的不一定是data node，
+    // 怀疑是所有的session node）
     private void registerSessionNode(URL leaderUrl) {
         URL clientUrl = new URL(NetUtil.getLocalAddress().getHostAddress(), 0);
-        SessionNode sessionNode = new SessionNode(clientUrl,
-            sessionServerConfig.getSessionServerRegion());
+        SessionNode sessionNode = new SessionNode(clientUrl, sessionServerConfig.getSessionServerRegion());
         Object ret = sendMetaRequest(sessionNode, leaderUrl);
         if (ret instanceof NodeChangeResult) {
             NodeChangeResult nodeChangeResult = (NodeChangeResult) ret;
-            NodeManager nodeManager = NodeManagerFactory.getNodeManager(nodeChangeResult
-                .getNodeType());
+            NodeManager nodeManager = NodeManagerFactory.getNodeManager(nodeChangeResult.getNodeType());
             //update data node info
             nodeManager.updateNodes(nodeChangeResult);
             LOGGER.info("Register MetaServer Session Node success!get data node list {}",
