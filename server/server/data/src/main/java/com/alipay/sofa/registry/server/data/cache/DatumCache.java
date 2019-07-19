@@ -46,7 +46,7 @@ public class DatumCache {
     private static final Map<String, Map<String, Datum>>     DATUM_MAP           = new ConcurrentHashMap<>();
 
     /**
-     * row:     ip:port
+     * row:     ip:port   registry-client的地址，而不是session的地址
      * column:  registerId
      * value:   publisher
      */
@@ -136,7 +136,7 @@ public class DatumCache {
         MergeResult mergeResult;
         String dataCenter = datum.getDataCenter();
         String dataInfoId = datum.getDataInfoId();
-        Map<String, Datum> map = DATUM_MAP.get(dataCenter);
+        Map<String/*dataInfoId*/, Datum> map = DATUM_MAP.get(dataCenter);
         if (map == null) {
             map = new ConcurrentHashMap<>();
             Map<String, Datum> ret = DATUM_MAP.putIfAbsent(dataCenter, map);
@@ -153,7 +153,7 @@ public class DatumCache {
 
         Datum ret = map.putIfAbsent(dataInfoId, datum);
         if (ret == null) {
-            Set<Entry<String, Publisher>> entries = datum.getPubMap().entrySet();
+            Set<Entry<String/*registerId*/, Publisher>> entries = datum.getPubMap().entrySet();
             Iterator<Entry<String, Publisher>> iterator = entries.iterator();
             while (iterator.hasNext()) {
                 Entry<String, Publisher> entry = iterator.next();
